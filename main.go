@@ -17,6 +17,9 @@ func main() {
 	r.Get("/health", func(w http.ResponseWriter, _ *http.Request) {
 		json.NewEncoder(w).Encode(map[string]bool{"ok": true})
 	})
+	r.Get("/ready", func(w http.ResponseWriter, _ *http.Request) {
+		json.NewEncoder(w).Encode(map[string]bool{"ready": true})
+	})
 	r.Get("/forecast/{city}", func(w http.ResponseWriter, req *http.Request) {
 		json.NewEncoder(w).Encode(weather.Forecast(chi.URLParam(req, "city"), os.Getenv("OPENWEATHER_KEY")))
 	})
